@@ -5,7 +5,7 @@ function CartDisplay() {
 
   useEffect(() => {
     // Assuming you have the user's ID saved somewhere after login
-    const userId = 'YOUR_USER_ID';
+    const userId = 'user1';
 
     fetch(`https://fakestoreapi.com/carts/user/${userId}`)
       .then(res => res.json())
