@@ -37,13 +37,20 @@ function Navbar({ token, setToken }) {
             <Link className="nav-link" to="/cart">Cart ({cartCount})</Link>
           </li>
           {token ? (
-            <li className="nav-item">
-              <Link className="nav-link" to="/logout" onClick={handleLogout}>Logout</Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/logout" onClick={handleLogout}>Logout</Link>
+              </li>
+            </>
           ) : (
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">Login</Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">Login</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/signup">Signup</Link>
+              </li>
+            </>
           )}
         </ul>
       </div>

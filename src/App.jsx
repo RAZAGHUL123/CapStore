@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetail from './components/ProductDetail';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import SignupPage from './components/SignupPage'; // Add this line for the SignupPage import
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || null);
@@ -19,24 +20,14 @@ export default function App() {
       <BrowserRouter>
         <Navigation token={token} setToken={setToken} />
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
-          {token && (
-            <Route
-              path="/authenticated"
-              element={<Home />}
-            />
-          )}
-          {token && (
-            <Route
-              path="/logout"
-              element={<Logout setToken={setToken} />}
-            />
-          )}
+          <Route path="/signup" element={<SignupPage />} /> {/* Add this line for the SignupPage route */}
+          <Route path="/" element={<Home />} />
+          {token && <Route path="/logout" element={<Logout setToken={setToken} />} />}
         </Routes>
       </BrowserRouter>
     </CartProvider>
