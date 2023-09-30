@@ -1,0 +1,119 @@
+/* General Styles */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Product List and Individual Product Styles */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+.product {
+  width: 300px;
+  border: 1px solid #ccc;
+  margin: 16px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Add to Cart Button Styles */
+.add-to-cart-button,
+.btn-primary {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover,
+.btn-primary:hover {
+  background-color: darkblue;
+}
+
+/* Bootstrap Carousel Styles */
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.footer-item {
+  flex: 1;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .footer-item {
+    flex-basis: 100%;
+    text-align: center;
+  }
+}
+.selected {
+  background-color: brightblue;
+  color: white;
+}
+/* CSS for the cart container */
+.cart-container {
+  max-height: 300px; /* Set a fixed height for the cart */
+  overflow-y: auto; /* Enable vertical scrolling if the content exceeds the height */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  padding: 10px;
+}
+
+/* CSS for individual cart items */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Style the "Remove" button */
+.cart-item button {
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Style the total price */
+.cart-total {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.product-image {
+  max-width: 200px; /* Adjust the size as needed */
+  height: auto; /* This will maintain the image's aspect ratio */
+}
