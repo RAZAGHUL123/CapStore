@@ -14,7 +14,7 @@ import Logout from './components/Logout';
 import SignupPage from './components/SignupPage';
 import UserDashboard from './components/UserDashboard';
 import Footer from './components/Footer';
-import InfiniteBox from './components/InfiniteBox';  // Corrected the import
+import InfiniteBox from './components/InfiniteBox';
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || null);
@@ -24,21 +24,25 @@ export default function App() {
       <BrowserRouter>
         <Navigation token={token} setToken={setToken} />
         <InfiniteBox>
-          <div className="app-content"> {/* Add this wrapper around the Routes */}
+          <div className="app-content">
             <Routes>
+              {/* Routes available for everyone */}
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+              
               {token ? (
                 <>
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<Contact />} />
+                  {/* Routes available only when logged in */}
                   <Route path="/cart" element={<Cart />} />
-                  <Route path="/product/:productId" element={<ProductDetail />} />
                   <Route path="/dashboard" element={<UserDashboard username="John" />} />
-                  <Route path="/store" element={<Store />} />
                   <Route path="/logout" element={<Logout setToken={setToken} />} />
                   <Route path="*" element={<Navigate to="/dashboard" />} />
                 </>
               ) : (
                 <>
+                  {/* Routes available only when not logged in */}
                   <Route path="/login" element={<Login setToken={setToken} />} />
                   <Route path="/signup" element={<SignupPage />} />
                   <Route path="*" element={<Navigate to="/login" />} />

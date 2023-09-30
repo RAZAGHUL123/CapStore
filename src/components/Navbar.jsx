@@ -36,11 +36,11 @@ function Navbar({ token, setToken }) {
           <li className="nav-item">
             <Link className="nav-link" to="/cart">Cart ({cartCount})</Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/store">Store</Link> {/* Store link appears for everyone */}
+          </li>
           {token ? (
             <>
-              <li className="nav-item">
-                <Link className="nav-link" to="/store">Store</Link> {/* Store link appears only when user is logged in */}
-              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">Dashboard</Link> {/* Dashboard link */}
               </li>
