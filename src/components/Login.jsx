@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const LoginPage = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -48,7 +48,7 @@ export const LoginPage = () => {
             console.error('Error fetching user details:', err);
           });
 
-        navigate('/authenticated');
+        navigate('/dashboard');  // Redirecting to dashboard
       } else {
         throw new Error('Token not provided in response');
       }
@@ -88,4 +88,4 @@ export const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

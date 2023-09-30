@@ -39,6 +39,12 @@ function Navbar({ token, setToken }) {
           {token ? (
             <>
               <li className="nav-item">
+                <Link className="nav-link" to="/store">Store</Link> {/* Store link appears only when user is logged in */}
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">Dashboard</Link> {/* Dashboard link */}
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/logout" onClick={handleLogout}>Logout</Link>
               </li>
             </>
