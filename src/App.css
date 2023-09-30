@@ -59,26 +59,7 @@
   justify-content: center;
   align-items: center;
 }
-.footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background-color: #333;
-  color: white;
-  padding: 1rem;
-}
 
-.footer-item {
-  flex: 1;
-  padding: 1rem;
-}
-
-@media (max-width: 768px) {
-  .footer-item {
-    flex-basis: 100%;
-    text-align: center;
-  }
-}
 .selected {
   background-color: brightblue;
   color: white;
@@ -178,4 +159,40 @@ input[type="password"] {
   align-items: center;
   justify-content: center;
   flex-direction:column;
+}
+/* InfiniteBox.css */
+
+/* InfiniteBox.css */
+
+.infinite-box-container {
+  display: flex;
+  flex-direction: column;  /* Stack children vertically */
+  min-height: 100%;        /* Take up full height of parent */
+}
+
+
+.infinite-box-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1 0 auto; /* Allow the content to grow and push the footer down */
+}
+
+.main-container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 60px; /* This should be equal or larger than the footer's total height (including any padding, margin, and border) */
+}
+
+footer {
+  background-color: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 20px 0px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
 }

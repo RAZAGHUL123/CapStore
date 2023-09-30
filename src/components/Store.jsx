@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
 
+// Assuming you have already implemented the EndlessCarousel as previously described:
+import EndlessCarousel from './EndlessCarousel';
+
 function StorePage() {
-  // Similar state setup and handling logic as in the Home component
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -54,6 +56,10 @@ function StorePage() {
     setSelectedCategory(category);
   };
 
+  const getProductsByCategory = (category) => {
+    return products.filter((product) => product.category === category);
+  };
+
   return (
     <div>
       <h1>Welcome to the Fake Store - Store Page</h1>
@@ -83,21 +89,45 @@ function StorePage() {
       <div className="product-list">
         {loading && <p>Loading...</p>}
         {error && <p>Error loading products. Please try again later.</p>}
+
+        {!loading && !error && selectedCategory === 'All' && categories.map(category => (
+          <div key={category}>
+            <h2>{category}</h2>
+            <EndlessCarousel 
+              items={getProductsByCategory(category).map(product => (
+                <Link key={product.id} to={`/product/${product.id}`}>
+                  <ProductCard
+                    product={{
+                      id: product.id,
+                      name: product.title,
+                      price: product.price,
+                      imageUrl: product.image,
+                    }}
+                  />
+                </Link>
+              ))}
+            />
+          </div>
+        ))}
+
+        {!loading && !error && selectedCategory !== 'All' && (
+          <EndlessCarousel 
+            items={filteredProducts.map(product => (
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <ProductCard
+                  product={{
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                    imageUrl: product.image,
+                  }}
+                />
+              </Link>
+            ))}
+          />
+        )}
+
         {!loading && !error && filteredProducts.length === 0 && <p>No products found.</p>}
-        {!loading &&
-          !error &&
-          filteredProducts.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`}>
-              <ProductCard
-                product={{
-                  id: product.id,
-                  name: product.title,
-                  price: product.price,
-                  imageUrl: product.image,
-                }}
-              />
-            </Link>
-          ))}
       </div>
     </div>
   );

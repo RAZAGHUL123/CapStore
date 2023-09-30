@@ -67,4 +67,23 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.infinite-box {
+  padding: 20px;
+  width: 300px;
+  height: 400px; /* You can adjust this */
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #ddd;
+  background: linear-gradient(white, #f8f8f8); /* Fade from the box's color to the body's color */
+}
+
+/* This pseudo-element will create the fade effect */
+.infinite-box::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px; /* Adjust this for the fade length */
+  background: linear-gradient(rgba(255, 255, 255, 0), #f8f8f8);
 }
