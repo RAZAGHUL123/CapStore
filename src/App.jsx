@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
@@ -8,6 +9,8 @@ import Cart from './components/Cart';
 import { CartProvider } from './components/CartContext'; // Import the CartContext and CartProvider
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductDetail from './components/ProductDetail';
+import Login from './components/Login';
+import Logout from './components/Logout';
 
 export default function App() {
   return (
@@ -20,6 +23,8 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} /> {/* Add a route for the Cart component */}
           <Route path="/product/:productId" element={<ProductDetail />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </CartProvider>

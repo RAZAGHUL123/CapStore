@@ -117,3 +117,53 @@
   max-width: 200px; /* Adjust the size as needed */
   height: auto; /* This will maintain the image's aspect ratio */
 }
+/* Login Container */
+.login-container {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-weight: bold;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Login Button */
+.login-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff0000;
+  margin-top: 10px;
+}
