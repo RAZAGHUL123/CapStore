@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
+import EndlessCarousel from './EndlessCarousel';
 import '../App.css';
 
 function StorePage() {
-  // ... (Rest of the state and hooks)
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,13 +13,13 @@ function StorePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Effect to fetch products and categories
   useEffect(() => {
     async function fetchData() {
       try {
         const productsResponse = await fetch('https://fakestoreapi.com/products');
         const productsData = await productsResponse.json();
         setProducts(productsData);
+        setFilteredProducts(productsData);
 
         const categoriesResponse = await fetch('https://fakestoreapi.com/products/categories');
         const categoriesData = await categoriesResponse.json();
@@ -31,27 +31,22 @@ function StorePage() {
         setLoading(false);
       }
     }
-
     fetchData();
   }, []);
 
-  // Effect to filter products based on selected category and search term
   useEffect(() => {
-    let filtered = [...products];
+    let filtered = products;
 
     if (selectedCategory !== 'All') {
       filtered = filtered.filter(product => product.category === selectedCategory);
     }
 
     if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      filtered = filtered.filter(product => product.title.toLowerCase().includes(searchTerm.toLowerCase()));
     }
 
     setFilteredProducts(filtered);
-  }, [selectedCategory, searchTerm, products]); 
-  // ... (rest of your code for states and effects)
+  }, [selectedCategory, searchTerm, products]);
 
   const handleCategoryClick = category => {
     setSelectedCategory(category);
@@ -90,31 +85,33 @@ function StorePage() {
         </div>
 
         <div className="product-display-area">
-          {loading ? <p>Loading...</p> : null}
-          {error ? <p>Error loading products. Please try again later.</p> : null}
+          {loading && <p>Loading...</p>}
+          {error && <p>Error loading products. Please try again later.</p>}
 
-          {!loading && !error && categories.map(category => (
+          {!loading && !error && selectedCategory === 'All' && categories.map(category => (
             <div key={category} className="category-section">
               <h2>{category}</h2>
-              <div className="products-row">
-                {getProductsByCategory(category).map(product => (
-                  <Link key={product.id} to={`/product/${product.id}`} className="product-card-link">
-                    <ProductCard product={product} />
-                  </Link>
-                ))}
-              </div>
+              <EndlessCarousel 
+                  items={getProductsByCategory(category).map(product => (
+                      <Link key={product.id} to={`/product/${product.id}`}>
+                          <ProductCard product={product} />
+                      </Link>
+                  ))}
+              />
             </div>
           ))}
 
           {!loading && !error && selectedCategory !== 'All' && (
-            <div className="products-row">
-              {filteredProducts.map(product => (
-                <Link key={product.id} to={`/product/${product.id}`} className="product-card-link">
-                  <ProductCard product={product} />
-                </Link>
-              ))}
-            </div>
+              <EndlessCarousel 
+                  items={filteredProducts.map(product => (
+                      <Link key={product.id} to={`/product/${product.id}`}>
+                          <ProductCard product={product} />
+                      </Link>
+                  ))}
+              />
           )}
+
+          {!loading && !error && filteredProducts.length === 0 && <p>No products found.</p>}
         </div>
       </div>
     </div>

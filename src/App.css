@@ -4,6 +4,7 @@
   margin: 0 auto;
 }
 
+
 .card {
   padding: 2em;
 }
@@ -62,12 +63,10 @@
 }
 
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background-color: #333;
-  color: white;
-  padding: 1rem;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  /* other styles for your footer */
 }
 
 .footer-item {
@@ -111,4 +110,13 @@
   flex: 1 0 calc(33.33% - 16px); /* Three products per row */
   box-sizing: border-box;
   margin-bottom: 16px;
+}
+.store-container {
+  display: flex; 
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100%; /* Ensure this container takes up at least the full height of the viewport */
+}
+
+.store-content {
+  flex: 1; /* Allows this content area to expand and take up all available space, pushing the footer down */
 }

@@ -1,24 +1,17 @@
-// src/components/Footer.jsx
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 const Footer = () => {
     return (
-        <footer style={styles.footer}>
-            © 2023 fakeOptic
+        <footer className="bg-dark text-white py-4 footer">
+            <Container className="d-flex">
+                {/* For demonstration, added multiple footer items */}
+                <div className="footer-item">Welcome to the best store</div>
+                <div className="footer-item">check out our fresh ware</div>
+                <div className="footer-item">ask about our discount</div>
+            </Container>
         </footer>
     );
-}
-
-const styles = {
-    footer: {
-        backgroundColor: "#333",
-        color: "#fff",
-        textAlign: "center",
-        padding: "20px 0",
-        position: "absolute",
-        bottom: 0,
-        width: "100%",
-    }
 }
 
 export default Footer;

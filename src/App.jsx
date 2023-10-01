@@ -50,9 +50,11 @@ export default function App() {
               )}
             </Routes>
           </div>
-          <Footer />
+         
         </InfiniteBox>
       </BrowserRouter>
+      <Footer />
     </CartProvider>
+    
   );
 }

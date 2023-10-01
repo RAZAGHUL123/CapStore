@@ -30,7 +30,7 @@ function ProductCard({ product }) {
           src={product.image} 
           alt={product.title}
           style={{
-            width: '100%',
+            width: '50%',
             height: '60%',
             objectFit: 'cover',
             objectPosition: 'center'
