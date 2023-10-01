@@ -62,23 +62,17 @@
   align-items: center;
 }
 
-.footer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  /* other styles for your footer */
-}
+
 
 .footer-item {
   flex: 1;
   padding: 1rem;
+  text-align: center;
 }
 
+
 @media (max-width: 768px) {
-  .footer-item {
-    flex-basis: 100%;
-    text-align: center;
-  }
+
 
   .product {
     flex-basis: 100%;  /* Products will take full width on smaller screens */

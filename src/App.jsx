@@ -14,7 +14,10 @@ import Logout from './components/Logout';
 import SignupPage from './components/SignupPage';
 import UserDashboard from './components/UserDashboard';
 import Footer from './components/Footer';
-import InfiniteBox from './components/InfiniteBox';
+
+import Checkout from './components/Checkout';
+import CheckoutWindow from './components/CheckoutWindow'; // Import the Checkout component
+import CheckoutForm from './components/CheckoutForm'; // Import the CheckoutForm component
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || null);
@@ -23,20 +26,22 @@ export default function App() {
     <CartProvider>
       <BrowserRouter>
         <Navigation token={token} setToken={setToken} />
-        <InfiniteBox>
+        
           <div className="app-content">
             <Routes>
               {/* Routes available for everyone */}
+              <Route path="/checkout" element={<CheckoutWindow />} /> {/* Add this line */}
+              <Route path="/checkout/form" element={<CheckoutForm />} /> {/* Add this line for the checkout form */}
+
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/store" element={<Store />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
-              
+
               {token ? (
                 <>
                   {/* Routes available only when logged in */}
-                  
                   <Route path="/dashboard" element={<UserDashboard username="John" />} />
                   <Route path="/logout" element={<Logout setToken={setToken} />} />
                   <Route path="*" element={<Navigate to="/dashboard" />} />
@@ -51,11 +56,9 @@ export default function App() {
               )}
             </Routes>
           </div>
-         
-        </InfiniteBox>
+          <Footer />
+        
       </BrowserRouter>
-      <Footer />
     </CartProvider>
-    
   );
 }

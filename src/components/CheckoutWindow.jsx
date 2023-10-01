@@ -1,9 +1,10 @@
 import React from 'react';
 import { useCart } from './CartContext';
 
-function Checkout() {
+function CheckoutWindow() {
   const { cart, getTotalPrice } = useCart();
 
+  // Function to handle the actual checkout process
   const handleCheckout = () => {
     // Perform any necessary actions for the checkout process
     // For example, you can send the cart items to a server, calculate the total, and proceed with the payment.
@@ -11,6 +12,10 @@ function Checkout() {
 
     // For demonstration, let's just log a message for now.
     console.log('Checkout process initiated');
+
+    // Programmatically navigate to the checkout page
+    // Assuming your checkout page route is "/checkout"
+    window.location.href = '/checkout';
   };
 
   return (
@@ -35,4 +40,4 @@ function Checkout() {
   );
 }
 
-export default Checkout;
+export default CheckoutWindow;

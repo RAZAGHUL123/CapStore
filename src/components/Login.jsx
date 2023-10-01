@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);  // State to store the user details
+  const [user, setUser] = useState(null);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -21,7 +21,7 @@ const Login = () => {
         },
         body: JSON.stringify({
           username: username,
-          password: password
+          password: password,
         }),
       });
 
@@ -34,25 +34,23 @@ const Login = () => {
       if (data.token) {
         localStorage.setItem('userToken', data.token);
 
-        // Fetch the user details after successful authentication
         fetch('https://fakestoreapi.com/users/1')
-          .then(res => {
-            if (!res.ok) throw new Error("Failed to fetch user details");
+          .then((res) => {
+            if (!res.ok) throw new Error('Failed to fetch user details');
             return res.json();
           })
-          .then(json => {
+          .then((json) => {
             setUser(json);
             console.log(json);
           })
-          .catch(err => {
+          .catch((err) => {
             console.error('Error fetching user details:', err);
           });
 
-        navigate('/dashboard');  // Redirecting to dashboard
+        navigate('/dashboard');
       } else {
         throw new Error('Token not provided in response');
       }
-
     } catch (err) {
       setError('Login failed. Please check your credentials.');
       console.error('Error:', err);
@@ -62,11 +60,31 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={handleLogin}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        backgroundColor: '#6441a5', // Purple background color
+      }}
+    >
+      <h1 style={{ color: 'white' }}>Login Page</h1>
+      <form
+        onSubmit={handleLogin}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: 'white',
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        }}
+      >
         <div>
-          <label>Username:</label>
+          <label style={{ marginBottom: '5px' }}>Username:</label>
           <input
             type="text"
             value={username}
@@ -74,15 +92,30 @@ const Login = () => {
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label style={{ marginBottom: '5px' }}>Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={loading}>Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            backgroundColor: '#6441a5', // Purple button color
+            color: 'white',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          {loading ? 'Logging In...' : 'Login'}
+        </button>
+        {error && (
+          <p style={{ color: 'red', marginTop: '10px' }}>{error}</p>
+        )}
       </form>
     </div>
   );

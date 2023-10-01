@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function Cart() {
   const { cart, removeFromCart, getTotalPrice, addToCart } = useCart();
   const [productData, setProductData] = useState([]); // Store product data
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false); // State to track user login status
+  const [checkoutInitiated, setCheckoutInitiated] = useState(false); // State to track checkout initiation
 
   useEffect(() => {
     // Fetch product data from the API
@@ -15,6 +18,11 @@ function Cart() {
       .catch((error) => {
         console.error('Error fetching product data:', error);
       });
+
+    // Check user login status (you should implement your own logic here)
+    // For demonstration, I'm using a simple condition
+    // You should replace this with your actual user authentication logic
+    setUserIsLoggedIn(localStorage.getItem('userToken') !== null);
   }, []); // Fetch data once when the component mounts
 
   const countSameProducts = (productId) => {
@@ -26,12 +34,27 @@ function Cart() {
     }, 0);
   };
 
+  // Function to handle the checkout initiation
+  const handleInitiateCheckout = () => {
+    setCheckoutInitiated(true); // Set checkout initiation to true
+  };
+
+  // Function to handle the checkout process
+  const handleCheckout = () => {
+    // Perform any necessary actions for the checkout process
+    // For example, you can send the cart items to a server, calculate the total, and proceed with the payment.
+    // After successful checkout, you can clear the cart or perform any other required actions.
+
+    // For demonstration, let's just log a message for now.
+    console.log('Checkout process initiated');
+  };
+
   return (
     <div className="container mt-4">
       <h2>Your Cart</h2>
       {cart.map((cartItem) => {
         const product = productData.find((product) => product.id === cartItem.id);
-        if (!product) return null; // Skip if product not found
+        if (!product) return null; // Skip if the product is not found
 
         const sameProductCount = countSameProducts(product.id);
 
@@ -49,7 +72,7 @@ function Cart() {
                 <div className="card-body">
                   <h4 className="card-title">
                     {product.title}{' '}
-                    {sameProductCount > 1 && ( // Add purple badge if more than 1 of the same product
+                    {sameProductCount > 1 && (
                       <span className="badge badge-purple">x{sameProductCount}</span>
                     )}
                   </h4>
@@ -81,6 +104,15 @@ function Cart() {
         );
       })}
       <h3 className="mt-3">Total Price: ${getTotalPrice()}</h3>
+      {cart.length > 0 && !checkoutInitiated && ( // Show Checkout button when the cart is not empty and checkout hasn't been initiated
+        <button onClick={handleInitiateCheckout} className="btn btn-primary">
+          {userIsLoggedIn ? 'Checkout' : 'Checkout as Guest User'}
+        </button>
+      )}
+      {cart.length === 0 && !userIsLoggedIn && ( // Show the message for guest users when the cart is empty
+        <p>Checkout as a guest user when you have items in your cart.</p>
+      )}
+      {checkoutInitiated && <CheckoutWindow />} {/* Render CheckoutWindow when checkout is initiated */}
     </div>
   );
 }
