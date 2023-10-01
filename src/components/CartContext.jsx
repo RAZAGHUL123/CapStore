@@ -10,22 +10,19 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
-    // Check if the product is already in the cart
-    const existingProduct = cart.find((item) => item.id === product.id);
-
-    if (existingProduct) {
+    const index = cart.findIndex((item) => item.id === product.id);
+  
+    if (index !== -1) {
       // If the product is already in the cart, update its count
-      const updatedCart = cart.map((item) =>
-        item.id === product.id
-          ? { ...item, count: item.count + 1 } // Increment count for existing product
-          : item
-      );
+      const updatedCart = [...cart];
+      updatedCart[index].count++;
       setCart(updatedCart);
     } else {
       // If the product is not in the cart, add it as a new entry with count 1
       setCart([...cart, { ...product, count: 1 }]);
     }
   };
+  
 
   const removeFromCart = (id) => {
     // Decrement the count for the specified item

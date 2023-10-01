@@ -120,3 +120,10 @@
 .store-content {
   flex: 1; /* Allows this content area to expand and take up all available space, pushing the footer down */
 }
+/* In your CSS file or styled-components */
+.badge-purple {
+  background-color: purple; /* Set the background color to purple */
+  color: white; /* Set the text color to white */
+  padding: 4px 8px; /* Add some padding for better styling */
+  border-radius: 4px; /* Add rounded corners */
+}

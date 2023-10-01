@@ -58,7 +58,7 @@ function StorePage() {
 
   return (
     <div className="store-container">
-      <h1>Welcome to the Fake Store - Store Page</h1>
+      <h1>Welcome to leonBlue - Store Page</h1>
       <div className="store-content">
         <div className="filter-sidebar">
           <input

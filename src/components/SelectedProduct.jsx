@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useCart } from './CartContext'; // Import your cart context
 
 function SelectedProduct() {
   // State to hold the selected product
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { addToCart } = useCart(); // Access addToCart function from the cart context
 
   // Effect to retrieve the selected product from local storage
   useEffect(() => {
@@ -17,9 +19,9 @@ function SelectedProduct() {
 
   // Function to handle adding the selected product to the cart
   const handleAddToCart = () => {
-    // Implement your logic here to add the selected product to the cart
-    // You can use a similar approach as in the ProductDetail component
-    // Example: addToCart(selectedProduct);
+    if (selectedProduct) {
+      addToCart(selectedProduct); // Add the selected product to the cart
+    }
   };
 
   return (
