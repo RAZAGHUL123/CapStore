@@ -30,12 +30,13 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/store" element={<Store />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
               
               {token ? (
                 <>
                   {/* Routes available only when logged in */}
-                  <Route path="/cart" element={<Cart />} />
+                  
                   <Route path="/dashboard" element={<UserDashboard username="John" />} />
                   <Route path="/logout" element={<Logout setToken={setToken} />} />
                   <Route path="*" element={<Navigate to="/dashboard" />} />
