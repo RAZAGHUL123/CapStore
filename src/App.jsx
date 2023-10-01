@@ -14,10 +14,7 @@ import Logout from './components/Logout';
 import SignupPage from './components/SignupPage';
 import UserDashboard from './components/UserDashboard';
 import Footer from './components/Footer';
-
-import Checkout from './components/Checkout';
-import CheckoutWindow from './components/CheckoutWindow'; // Import the Checkout component
-import CheckoutForm from './components/CheckoutForm'; // Import the CheckoutForm component
+import CheckoutPage from './components/CheckoutPage'; // Import the new CheckoutPage component
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || null);
@@ -30,8 +27,7 @@ export default function App() {
           <div className="app-content">
             <Routes>
               {/* Routes available for everyone */}
-              <Route path="/checkout" element={<CheckoutWindow />} /> {/* Add this line */}
-              <Route path="/checkout/form" element={<CheckoutForm />} /> {/* Add this line for the checkout form */}
+              <Route path="/checkout" element={<CheckoutPage />} /> {/* Use the new CheckoutPage component */}
 
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

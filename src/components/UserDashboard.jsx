@@ -35,7 +35,7 @@ const UserDashboard = ({ username }) => {
   }, [username]);
 
   // Function to simulate product recommendation logic
-  const getRecommendedProducts = (viewedProducts) => {
+  const getRecommendedProducts = () => {
     // In a real application, this logic would involve recommendations based on user behavior.
     // For simplicity, let's return a few random products here.
     const randomProductIds = [1, 2, 3, 4, 5]; // Replace with actual product IDs

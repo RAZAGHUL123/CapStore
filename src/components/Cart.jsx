@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import CheckoutForm from './CheckoutForm'; // Import the CheckoutForm component
 
 function Cart() {
   const { cart, removeFromCart, getTotalPrice, addToCart } = useCart();
@@ -112,7 +113,7 @@ function Cart() {
       {cart.length === 0 && !userIsLoggedIn && ( // Show the message for guest users when the cart is empty
         <p>Checkout as a guest user when you have items in your cart.</p>
       )}
-      {checkoutInitiated && <CheckoutWindow />} {/* Render CheckoutWindow when checkout is initiated */}
+      {checkoutInitiated && <CheckoutForm />} {/* Render CheckoutForm when checkout is initiated */}
     </div>
   );
 }
