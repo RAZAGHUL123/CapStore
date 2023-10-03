@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext'; // Import your cart context
 
 function SelectedProduct() {
@@ -9,11 +9,11 @@ function SelectedProduct() {
   // Effect to retrieve the selected product from local storage
   useEffect(() => {
     // Retrieve the selected product from local storage
-    const storedProduct = localStorage.getItem('selectedProduct');
+    const storedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
 
     if (storedProduct) {
       // If a selected product exists in local storage, set it in the state
-      setSelectedProduct(JSON.parse(storedProduct));
+      setSelectedProduct(storedProduct);
     }
   }, []);
 
@@ -32,7 +32,7 @@ function SelectedProduct() {
           {/* Display the selected product details */}
           <h3>{selectedProduct.name}</h3>
           <p>Price: ${selectedProduct.price}</p>
-          <img src={selectedProduct.imageUrl} alt={selectedProduct.name} />
+          <img src={selectedProduct.image} alt={selectedProduct.name} />
           
           {/* Additional product details */}
           <p>Description: {selectedProduct.description || 'No description available.'}</p>
