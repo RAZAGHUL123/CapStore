@@ -2,29 +2,23 @@ import React from 'react';
 
 function About() {
   const pageStyle = {
-    backgroundColor: '#3b3b3b', // Vintage dark background
-    color: '#ffcd75', // Edgy golden text
-    fontFamily: 'Cinzel Decorative, cursive', // Vintage font
-    padding: '2rem', // Comfortable spacing
-    textAlign: 'center', // Centered content
+    color: '#007bff',
+    fontFamily: 'Arial, sans-serif',
+    padding: '2rem',
+    textAlign: 'center',
   };
 
   return (
     <div style={pageStyle}>
-      <h1 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Welcome to the Abyss</h1>
-      <p style={{ fontSize: '1.2rem' }}>
-        In the dimly lit corners of our existence, where shadows dance and secrets whisper,
-        <br /> you've found your way to a place where reality blurs with nightmares.
+      <h1>What’s Good at Apex Store?</h1>
+      <p>
+        Welcome to the vibe, family! Apex Store ain’t just a store - it’s a journey. A stroll through lush aisles of quality, choice, and mad deals that's just too icy to pass up.
       </p>
-      <p style={{ fontSize: '1.2rem', marginTop: '2rem' }}>
-        We're here to explore the depths of fear, the beauty of darkness, and the mysteries
-        <br /> that lurk in the eerie stillness of the night.
+      <p>
+        Now, whether you're just chillin’ or on a mission to cop some exclusive items, we got you. With us, it's more than shopping; it’s an experience, it’s a vibe, it’s where your wants meet our stash.
       </p>
-      <p style={{ fontSize: '1.2rem', marginTop: '2rem' }}>
-        Stay with us, if you dare, as we journey through the haunted corridors of the unknown.
-      </p>
-      <p style={{ fontSize: '1.2rem', marginTop: '2rem' }}>
-        Keep an eye on the shadows - for here, they have eyes of their own.
+      <p>
+        Kick back, scroll through, and let’s make it rain with some top-tier shopping adventures, shall we?
       </p>
     </div>
   );

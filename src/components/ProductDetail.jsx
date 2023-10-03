@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { GlassMagnifier } from 'react-image-magnifiers'; // Import GlassMagnifier
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -50,13 +51,20 @@ function ProductDetail() {
       ) : error ? (
         <p>Error: {error.message}</p>
       ) : selectedProduct ? (
-        <>
+        <div>
           <h2>Product Detail</h2>
           <h3>{selectedProduct.title}</h3>
           <p>Price: ${selectedProduct.price.toFixed(2)}</p>
+          {/* Replace the regular img element with GlassMagnifier */}
+          <GlassMagnifier
+            imageSrc={selectedProduct.image} // Use the image from the FakeStore API
+            imageAlt={selectedProduct.title}
+            largeImageSrc={selectedProduct.image}
+            style={{ maxWidth: '300px', maxHeight: '300px' }} // Adjust the dimensions as needed
+          />
           <p>Description: {selectedProduct.description}</p>
           <button onClick={addToCart}>Add to Cart</button>
-        </>
+        </div>
       ) : (
         <p>No product selected.</p>
       )}

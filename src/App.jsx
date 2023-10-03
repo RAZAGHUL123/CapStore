@@ -14,6 +14,8 @@ import Logout from './components/Logout';
 import SignupPage from './components/SignupPage';
 import UserDashboard from './components/UserDashboard';
 import Footer from './components/Footer';
+import Preview from './components/Preview'
+
 import CheckoutPage from './components/CheckoutPage'; // Import the new CheckoutPage component
 
 export default function App() {
@@ -28,7 +30,7 @@ export default function App() {
             <Routes>
               {/* Routes available for everyone */}
               <Route path="/checkout" element={<CheckoutPage />} /> {/* Use the new CheckoutPage component */}
-
+              <Route path="/preview" component={Preview} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/store" element={<Store />} />
@@ -46,6 +48,7 @@ export default function App() {
                 <>
                   {/* Routes available only when not logged in */}
                   <Route path="/login" element={<Login setToken={setToken} />} />
+                  <Route path="/dashboard" element={token ? <UserDashboard /> : <Navigate to="/UserDashboard" />} />
                   <Route path="/signup" element={<SignupPage />} />
                   <Route path="*" element={<Navigate to="/login" />} />
                 </>

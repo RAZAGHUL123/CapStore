@@ -1,81 +1,67 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
-const UserDashboard = ({ username }) => {
-  const [userActivities, setUserActivities] = useState([]);
-  const [userFavorites, setUserFavorites] = useState([]);
-  const [userOrders, setUserOrders] = useState([]);
-  const [userMessages, setUserMessages] = useState([]);
-  const [recommendedProducts, setRecommendedProducts] = useState([]);
-  // Add state for user profile, wishlist, and address book
+const UserDashboard = () => {
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch user activities based on username
-    fetch(`https://fakestoreapi.com/users?username=${username}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length > 0) {
-          // Assume the API provides user-related data structure
-          const user = data[0];
+    // Fetch user data on component mount
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/users/1');
+        if (!response.ok) throw new Error('Failed to fetch user data');
 
-          setUserActivities(user.activities);
-          setUserFavorites(user.favorites);
-          setUserOrders(user.orders);
-          setUserMessages(user.messages);
-          // Set state for user profile, wishlist, and address book based on user data
-
-          // Simulate recommended products based on user's activities
-          const viewedProducts = user.activities.map((activity) => activity.product);
-          const recommended = getRecommendedProducts(viewedProducts);
-          setRecommendedProducts(recommended);
-        }
-      })
-      .catch((error) => {
+        const data = await response.json();
+        setUserData(data);
+        setLoading(false);
+      } catch (error) {
         console.error('Error fetching user data:', error);
-      });
-  }, [username]);
+      }
+    };
 
-  // Function to simulate product recommendation logic
-  const getRecommendedProducts = () => {
-    // In a real application, this logic would involve recommendations based on user behavior.
-    // For simplicity, let's return a few random products here.
-    const randomProductIds = [1, 2, 3, 4, 5]; // Replace with actual product IDs
-    const recommended = randomProductIds.map((productId) => {
-      // Fetch recommended products based on productId
-      // This is a placeholder and should be replaced with an API call to fetch actual product data.
-      return fetch(`https://fakestoreapi.com/products/${productId}`)
-        .then((response) => response.json())
-        .then((data) => data)
-        .catch((error) => {
-          console.error('Error fetching recommended product:', error);
-        });
-    });
-    return Promise.all(recommended);
+    fetchUserData();
+  }, []);
+
+  const handleProfileUpdate = async (event) => {
+    event.preventDefault();
+    // Implement API call to update user data here...
   };
 
-  return (
-    <div className="container mt-5">
-      <div className="jumbotron">
-        <h1 className="display-4">Welcome back, {username}!</h1>
-        <p className="lead">Here's a summary of your activities.</p>
-        <hr className="my-4" />
-      </div>
-      <div className="row">
-        {/* Existing user activity sections */}
-        {/* ... */}
-        <div className="col-md-3">
-          <div className="card">
-            <div className="card-header">Recommended Products</div>
-            <ul className="list-group list-group-flush">
-              {recommendedProducts.map((product, index) => (
-                <li key={index} className="list-group-item">
-                  {product.title}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+  return loading ? (
+    <p>Loading...</p>
+  ) : (
+    <Container style={{ backgroundColor: '#f8f9fa', padding: '20px' }}>
+      <Row>
+        <Col>
+          <h1 style={{ color: '#007bff' }}>Welcome, {userData.name.firstname}!</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>
+          <h2 style={{ color: '#007bff' }}>Profile Settings</h2>
+          <Form onSubmit={handleProfileUpdate}>
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" defaultValue={userData.email} />
+            </Form.Group>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" defaultValue={userData.username} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Update Profile
+            </Button>
+          </Form>
+        </Col>
+        <Col md={6}>
+          <h2 style={{ color: '#007bff' }}>Address</h2>
+          <p>{userData.address.street}, {userData.address.number}</p>
+          <p>{userData.address.city}, {userData.address.zipcode}</p>
+          <p>Location: {userData.address.geolocation.lat}, {userData.address.geolocation.long}</p>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

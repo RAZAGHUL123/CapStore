@@ -14,50 +14,38 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://fakestoreapi.com/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+        const response = await fetch('https://fakestoreapi.com/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            }),
+        });
 
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
+        if (!response.ok) {
+            throw new Error('Login failed');
+        }
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.token) {
-        localStorage.setItem('userToken', data.token);
-
-        fetch('https://fakestoreapi.com/users/1')
-          .then((res) => {
-            if (!res.ok) throw new Error('Failed to fetch user details');
-            return res.json();
-          })
-          .then((json) => {
-            setUser(json);
-            console.log(json);
-          })
-          .catch((err) => {
-            console.error('Error fetching user details:', err);
-          });
-
-        navigate('/dashboard');
-      } else {
-        throw new Error('Token not provided in response');
-      }
+        if (data.token) {
+            localStorage.setItem('userToken', data.token);
+            
+            // Using window.location to navigate and refresh the page
+            window.location.href = "/dashboard";
+        } else {
+            throw new Error('Token not provided in response');
+        }
     } catch (err) {
-      setError('Login failed. Please check your credentials.');
-      console.error('Error:', err);
+        setError('Login failed. Please check your credentials.');
+        console.error('Error:', err);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   return (
     <div
@@ -67,10 +55,18 @@ const Login = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#6441a5', // Purple background color
+        backgroundColor: '#6441a5',
       }}
     >
-      <h1 style={{ color: 'white' }}>Login Page</h1>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <img 
+          src="your-logo-url-here.png" 
+          alt="ApexLocker Logo" 
+          style={{ width: '50px', marginRight: '10px' }}
+        />
+        <h1 style={{ color: 'white', fontSize: '24px' }}>ApexLocker</h1>
+      </div>
+      <h2 style={{ color: 'white', marginBottom: '20px' }}>Login</h2>
       <form
         onSubmit={handleLogin}
         style={{
@@ -81,34 +77,38 @@ const Login = () => {
           padding: '20px',
           borderRadius: '8px',
           boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+          width: '300px',
         }}
       >
-        <div>
-          <label style={{ marginBottom: '5px' }}>Username:</label>
+        <div style={{ marginBottom: '15px', width: '100%' }}>
+          <label style={{ marginBottom: '5px', display: 'block' }}>Username:</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
         </div>
-        <div>
-          <label style={{ marginBottom: '5px' }}>Password:</label>
+        <div style={{ marginBottom: '15px', width: '100%' }}>
+          <label style={{ marginBottom: '5px', display: 'block' }}>Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
         </div>
         <button
           type="submit"
           disabled={loading}
           style={{
-            backgroundColor: '#6441a5', // Purple button color
+            backgroundColor: '#6441a5',
             color: 'white',
             border: 'none',
             padding: '10px 20px',
             borderRadius: '4px',
             cursor: 'pointer',
+            width: '100%',
           }}
         >
           {loading ? 'Logging In...' : 'Login'}

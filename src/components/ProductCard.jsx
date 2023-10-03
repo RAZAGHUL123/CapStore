@@ -46,16 +46,16 @@ function ProductCard({ product }) {
             <div>
               <Card.Text
                 style={{
-                  fontSize: '8px',
+                  fontSize: '10px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
-                  marginBottom: '5px',
+                  marginBottom: '10px',
                 }}
               >
                 Description: {product.description}
               </Card.Text>
-              <Button variant="primary" size="sm" onClick={handleAddToCart}>
+              <Button variant="primary" size="md" onClick={handleAddToCart}>
                 Add to Cart
               </Button>
             </div>
