@@ -34,7 +34,7 @@ const Login = () => {
         localStorage.setItem('userToken', data.token);
   
         // Use window.location.href to navigate and refresh the page
-        window.location.href = "/home";
+        window.location.href = "/dashboard";
   
         // Delay the second refresh for 2 seconds (adjust as needed)
         setTimeout(() => {
