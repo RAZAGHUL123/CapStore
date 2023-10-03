@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { GlassMagnifier } from 'react-image-magnifiers'; // Import GlassMagnifier
 
 function ProductDetail() {
   const { productId } = useParams();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [cart, setCart] = useState([]); // State to manage the cart
+  const [cart, setCart] = useState([]);
 
-  // Function to fetch product information
   const fetchProductInfo = (productId) => {
     fetch(`https://fakestoreapi.com/products/${productId}`)
       .then((response) => {
@@ -29,7 +27,6 @@ function ProductDetail() {
       });
   };
 
-  // Function to add the selected product to the cart
   const addToCart = () => {
     if (selectedProduct) {
       setCart([...cart, selectedProduct]);
@@ -55,12 +52,10 @@ function ProductDetail() {
           <h2>Product Detail</h2>
           <h3>{selectedProduct.title}</h3>
           <p>Price: ${selectedProduct.price.toFixed(2)}</p>
-          {/* Replace the regular img element with GlassMagnifier */}
-          <GlassMagnifier
-            imageSrc={selectedProduct.image} // Use the image from the FakeStore API
-            imageAlt={selectedProduct.title}
-            largeImageSrc={selectedProduct.image}
-            style={{ maxWidth: '300px', maxHeight: '300px' }} // Adjust the dimensions as needed
+          <img
+            src={selectedProduct.image}
+            alt={selectedProduct.title}
+            style={{ maxWidth: '300px', maxHeight: '300px' }}
           />
           <p>Description: {selectedProduct.description}</p>
           <button onClick={addToCart}>Add to Cart</button>
