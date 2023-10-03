@@ -32,9 +32,14 @@ const Login = () => {
   
       if (data.token) {
         localStorage.setItem('userToken', data.token);
-        
+  
         // Use window.location.href to navigate and refresh the page
         window.location.href = "/home";
+  
+        // Delay the second refresh for 2 seconds (adjust as needed)
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } else {
         throw new Error('Token not provided in response');
       }
@@ -45,6 +50,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
   
 
   return (
