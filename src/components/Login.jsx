@@ -7,45 +7,44 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
 
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
-        const response = await fetch('https://fakestoreapi.com/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-            }),
-        });
+      const response = await fetch('https://fakestoreapi.com/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
 
-        if (!response.ok) {
-            throw new Error('Login failed');
-        }
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (data.token) {
-            localStorage.setItem('userToken', data.token);
-            
-            // Using window.location to navigate and refresh the page
-            window.location.href = "/dashboard";
-        } else {
-            throw new Error('Token not provided in response');
-        }
+      if (data.token) {
+        localStorage.setItem('userToken', data.token);
+
+        // Use the navigate function to redirect to the /dashboard route
+        navigate('/dashboard');
+      } else {
+        throw new Error('Token not provided in response');
+      }
     } catch (err) {
-        setError('Login failed. Please check your credentials.');
-        console.error('Error:', err);
+      setError('Login failed. Please check your credentials.');
+      console.error('Error:', err);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   return (
     <div
