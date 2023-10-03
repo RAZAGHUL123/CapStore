@@ -38,7 +38,7 @@ function ProductCard({ product }) {
           }}
         />
         <Card.Body style={{ padding: 0 }}> {/* Remove padding from Card.Body */}
-          <Card.Title style={{ fontSize: '8px', marginBottom: '5px' }}>{product.title}</Card.Title>
+          <Card.Title style={{ fontSize: '12px', marginBottom: '5px' }}>{product.title}</Card.Title>
           <Card.Text style={{ marginBottom: '5px' }}>
             Price: ${product.price.toFixed(2)}
           </Card.Text>
