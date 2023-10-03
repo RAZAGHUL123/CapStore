@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
 import { Navbar, Nav } from 'react-bootstrap'; 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CustomNavbar({ token, setToken }) {
