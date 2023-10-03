@@ -34,7 +34,7 @@ const Login = () => {
         localStorage.setItem('userToken', data.token);
         
         // Use window.location.href to navigate and refresh the page
-        window.location.href = "/UserDashboard";
+        window.location.href = "/home";
       } else {
         throw new Error('Token not provided in response');
       }
