@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true);
-
+  
     try {
       const response = await fetch('https://fakestoreapi.com/auth/login', {
         method: 'POST',
@@ -23,18 +23,18 @@ const Login = () => {
           password: password,
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Login failed');
       }
-
+  
       const data = await response.json();
-
+  
       if (data.token) {
         localStorage.setItem('userToken', data.token);
-
-        // Use the navigate function to redirect to the /dashboard route
-        navigate('/dashboard');
+        
+        // Use window.location.href to navigate and refresh the page
+        window.location.href = "/UserDashboard";
       } else {
         throw new Error('Token not provided in response');
       }
@@ -45,6 +45,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div
